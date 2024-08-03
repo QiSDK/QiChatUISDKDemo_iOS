@@ -67,6 +67,7 @@ class ViewController: UIViewController, LineDetectDelegate  {
     }
     
     @objc func buttonClick(){
+        //唤起客服咨询类型页面
         let vc = ConsultTypeViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
