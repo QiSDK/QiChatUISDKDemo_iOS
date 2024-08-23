@@ -15,7 +15,6 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
     //咨询类型页面
     lazy var entranceView: BWEntranceView = {
         let view = BWEntranceView()
-        view.backgroundColor = UIColor.white
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
@@ -23,7 +22,11 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
     
     lazy var headerView: UIView = {
         let v = UIView(frame: CGRect.zero)
-        v.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            v.backgroundColor = UIColor.tertiarySystemBackground
+        } else {
+            v.backgroundColor = UIColor.white
+        }
         return v
     }()
     
@@ -38,7 +41,11 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
     lazy var headerTitle: UILabel = {
         let v = UILabel(frame: CGRect.zero)
         v.text = "--"
-        v.textColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            v.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+        }
         return v
     }()
 
@@ -46,6 +53,9 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
         let btn = UIButton(frame: CGRect.zero)
         btn.setImage(UIImage.svgInit("backicon", size: CGSize(width: 40, height: 40)), for: UIControl.State.normal)
         btn.addTarget(self, action: #selector(closeClick), for: UIControl.Event.touchUpInside)
+        if #available(iOS 13.0, *) {
+            btn.setImage(UIImage.svgInit("backicon", size: CGSize(width: 40, height: 40))?.withTintColor(UIColor.systemGray), for: UIControl.State.normal)
+        }
         return btn
     }()
     
@@ -68,14 +78,18 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+//        if #available(iOS 13.0, *) {
+//            self.view.backgroundColor = UIColor.systemBackground
+//        } else {
+//            // Fallback on earlier versions
+//        }
         self.view.addSubview(entranceView)
         
         view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(40)
+            make.height.equalTo(50)
             make.top.equalToSuperview().offset(kDeviceTop)
         }
         //
@@ -101,7 +115,13 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
             make.centerY.equalToSuperview()
         }
         
-        entranceView.backgroundColor = chatBackColor
+        if #available(iOS 13.0, *) {
+            entranceView.backgroundColor = UIColor.secondarySystemBackground
+            view.backgroundColor = UIColor.secondarySystemBackground
+            setStatusBar(backgroundColor: UIColor.tertiarySystemBackground)
+        } else {
+            entranceView.backgroundColor = UIColor.white
+        }
         entranceView.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -162,5 +182,18 @@ open class ConsultTypeViewController: UIViewController, LineDetectDelegate {
             //无可用线路
             self.view.makeToast(error.Message)
         }
+    }
+    
+    func setStatusBar(backgroundColor: UIColor) {
+        let statusBarFrame: CGRect
+        if #available(iOS 13.0, *) {
+            //statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+            statusBarFrame = CGRectMake(0, 0, kScreenWidth, kDeviceTop)
+        } else {
+            statusBarFrame = UIApplication.shared.statusBarFrame
+        }
+        let statusBarView = UIView(frame: statusBarFrame)
+        statusBarView.backgroundColor = backgroundColor
+        view.addSubview(statusBarView)
     }
 }

@@ -43,7 +43,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (~> 6.5.9)
   - SnapKit (~> 5.0.1)
   - TeneasyChatSDK_iOS (from `https://github.com/QiSDK/QiChatSDK_iOS.git`)
-  - TeneasyChatSDKUI_iOS (from `https://github.com/QiSDK/QiChatDemo_iOS`)
+  - TeneasyChatSDKUI_iOS (from `https://github.com/QiSDK/QiChatDemo_iOS.git`, tag `1.0.6`)
   - XMMenuPopover
 
 SPEC REPOS:
@@ -67,15 +67,16 @@ EXTERNAL SOURCES:
   TeneasyChatSDK_iOS:
     :git: https://github.com/QiSDK/QiChatSDK_iOS.git
   TeneasyChatSDKUI_iOS:
-    :git: https://github.com/QiSDK/QiChatDemo_iOS
+    :git: https://github.com/QiSDK/QiChatDemo_iOS.git
+    :tag: 1.0.6
 
 CHECKOUT OPTIONS:
   TeneasyChatSDK_iOS:
     :commit: d5410b35d499e846170a3ccda85259a884fdd45d
     :git: https://github.com/QiSDK/QiChatSDK_iOS.git
   TeneasyChatSDKUI_iOS:
-    :commit: 6f9f6de0d9a38bc596457c3c4373cb09b825a97f
-    :git: https://github.com/QiSDK/QiChatDemo_iOS
+    :git: https://github.com/QiSDK/QiChatDemo_iOS.git
+    :tag: 1.0.6
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -95,6 +96,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   XMMenuPopover: 5672063abba9abdc7c6c8293f30a43cdd2831f22
 
-PODFILE CHECKSUM: 1f86d8a53ed227ea36fed6f34de42aa051999583
+PODFILE CHECKSUM: 3f3fe3a0e215f50802d8adfbfbe9e22260445ff5
 
 COCOAPODS: 1.15.2

@@ -2,8 +2,9 @@ use_frameworks!
 
 platform :ios, '10.0'
 
-target 'QL-Demo_Example' do
-  pod 'TeneasyChatSDKUI_iOS', :git => 'https://github.com/QiSDK/QiChatDemo_iOS'
+target 'QL-UIDemo_Example' do
+  pod 'TeneasyChatSDKUI_iOS', :git => 'https://github.com/QiSDK/QiChatDemo_iOS.git',:tag => '1.0.6'
+
   pod 'TeneasyChatSDK_iOS', :git => 'https://github.com/QiSDK/QiChatSDK_iOS.git'
   #pod 'TeneasyChatSDKUI_iOS', :path => '../'
   pod 'SnapKit', '~> 5.0.1'
@@ -11,11 +12,11 @@ target 'QL-Demo_Example' do
   pod 'IQKeyboardManagerSwift'
   pod 'XMMenuPopover'
   
-  target 'QL-Demo_Tests' do
-    inherit! :search_paths
+#  target 'QL-Demo_Tests' do
+#    inherit! :search_paths
 
     
-  end
+  #end
 end
 
 post_install do |installer| #解决Xcode14编译问题

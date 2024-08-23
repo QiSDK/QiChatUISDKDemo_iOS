@@ -45,7 +45,11 @@ open class KeFuViewController: UIViewController{
 
     lazy var headerView: UIView = {
         let v = UIView(frame: CGRect.zero)
-        v.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            v.backgroundColor = UIColor.tertiarySystemBackground
+        } else {
+            // Fallback on earlier versions
+        }
         return v
     }()
 
@@ -57,7 +61,6 @@ open class KeFuViewController: UIViewController{
     lazy var timeLabel: UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.textAlignment = .center
-        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
@@ -81,13 +84,22 @@ open class KeFuViewController: UIViewController{
     lazy var headerTitle: UILabel = {
         let v = UILabel(frame: CGRect.zero)
         v.text = "--"
-        v.textColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            v.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+        }
         return v
     }()
 
     lazy var headerClose: UIButton = {
         let btn = UIButton(frame: CGRect.zero)
         btn.setImage(UIImage.svgInit("backicon", size: CGSize(width: 40, height: 40)), for: UIControl.State.normal)
+        if #available(iOS 13.0, *) {
+            btn.setImage(UIImage.svgInit("backicon", size: CGSize(width: 40, height: 40))?.withTintColor(UIColor.systemGray), for: UIControl.State.normal)
+        } else {
+            // Fallback on earlier versions
+        }
         btn.addTarget(self, action: #selector(closeClick), for: UIControl.Event.touchUpInside)
         return btn
     }()
@@ -104,7 +116,6 @@ open class KeFuViewController: UIViewController{
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
-        view.backgroundColor = chatBackColor
         view.separatorStyle = .none
         view.estimatedRowHeight = 50
         view.rowHeight = UITableView.automaticDimension
@@ -133,8 +144,11 @@ open class KeFuViewController: UIViewController{
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        tableView.backgroundColor = kBgColor
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = UIColor.secondarySystemBackground
+        } else {
+            // Fallback on earlier versions
+        }
 
         xToken = UserDefaults.standard.string(forKey: PARAM_XTOKEN) ?? ""
 
@@ -166,19 +180,21 @@ open class KeFuViewController: UIViewController{
     }
 
     func initView() {
-        
-        //view.backgroundColor = UIColor.green
         view.addSubview(toolBar)
         toolBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-kDeviceBottom)
         }
-        toolBar.backgroundColor = panelBack
+//        if #available(iOS 13.0, *) {
+//            toolBar.backgroundColor = UIColor.label
+//        } else {
+//            // Fallback on earlier versions
+//        }
 
         view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.width.equalTo(kScreenWidth)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
             make.left.equalToSuperview()
             make.top.equalToSuperview().offset(kDeviceTop)
         }
@@ -190,7 +206,11 @@ open class KeFuViewController: UIViewController{
             make.height.equalTo(30)
             make.bottom.equalTo(self.toolBar.snp.top)
         }
-        systemMsgLabel.backgroundColor = chatBackColor
+        if #available(iOS 13.0, *) {
+            systemMsgLabel.backgroundColor = UIColor.secondarySystemBackground
+        } else {
+            // Fallback on earlier versions
+        }
         systemMsgLabel.text = ""
         
         view.addSubview(tableView)
@@ -225,6 +245,13 @@ open class KeFuViewController: UIViewController{
         
         toolBar.textView.placeholder = "请输入想咨询的问题"
         headerTitle.text = "连接客服中..."
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.secondarySystemBackground
+            setStatusBar(backgroundColor: UIColor.tertiarySystemBackground)
+        } else {
+            // Fallback on earlier versions
+        }
         
         //addShadowToTableView()
     }
@@ -317,8 +344,8 @@ open class KeFuViewController: UIViewController{
         
         if isFirstLoad{
             //打招呼
-            /*let greetingMsg = lib.composeALocalMessage(textMsg: "您好，\(workerName)为您服务！")
-            appendDataSource(msg: greetingMsg, isLeft: true)*/
+            let greetingMsg = lib.composeALocalMessage(textMsg: "您好，\(workerName)为您服务！")
+            appendDataSource(msg: greetingMsg, isLeft: true)
             print("第一次打招呼")
             
             //自动回复的Cell
@@ -355,6 +382,9 @@ open class KeFuViewController: UIViewController{
             self.systemMsgLabel.text = ""
         }else{*/
             self.systemMsgLabel.text = "您好：\(workerName)为您服务！"
+        delayExecution(seconds: 5, completion: {
+            self.systemMsgLabel.text = ""
+        })
         //}
     }
     
@@ -579,28 +609,20 @@ open class KeFuViewController: UIViewController{
         }
     }
     
-    
-    func addShadowToTableView() {
-        // Set the shadow color
-        tableView.layer.shadowColor = UIColor.black.cgColor
-        
-        // Set the shadow opacity (0.0 to 1.0)
-        tableView.layer.shadowOpacity = 0.5
-        
-        // Set the shadow offset
-        tableView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        
-        // Set the shadow radius
-        tableView.layer.shadowRadius = 4
-        
-        // Optionally, you can set the shadow path for better performance
-        tableView.layer.shadowPath = UIBezierPath(rect: tableView.bounds).cgPath
-        
-        // Make sure the table view's layer masks to bounds is set to false
-        tableView.layer.masksToBounds = false
-    }
-    
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func setStatusBar(backgroundColor: UIColor) {
+        let statusBarFrame: CGRect
+        if #available(iOS 13.0, *) {
+            //statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+            statusBarFrame = CGRectMake(0, 0, kScreenWidth, kDeviceTop)
+        } else {
+            statusBarFrame = UIApplication.shared.statusBarFrame
+        }
+        let statusBarView = UIView(frame: statusBarFrame)
+        statusBarView.backgroundColor = backgroundColor
+        view.addSubview(statusBarView)
     }
 }

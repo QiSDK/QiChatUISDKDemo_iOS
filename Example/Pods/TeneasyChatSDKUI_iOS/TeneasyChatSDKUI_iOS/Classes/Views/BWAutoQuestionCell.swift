@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BWQuestionCell: UITableViewCell {
+class BWAutoQuestionCell: UITableViewCell {
     
     lazy var titleLab: UILabel = {
         let lab = UILabel()
@@ -54,11 +54,11 @@ class BWQuestionCell: UITableViewCell {
     override required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        if #available(iOS 13.0, *) {
-            backgroundColor = UIColor.systemBackground
-        } else {
-            // Fallback on earlier versions
-        }
+//        if #available(iOS 13.0, *) {
+//            backgroundColor = UIColor.secondarySystemBackground
+//        } else {
+//            // Fallback on earlier versions
+//        }
                 
         self.contentView.addSubview(self.titleLab)
         //self.contentView.addSubview(self.imgArrowRight)
@@ -86,6 +86,12 @@ class BWQuestionCell: UITableViewCell {
 //            make.centerY.equalToSuperview()
 //        }
 //        self.imgArrowRight.isHidden = true
+        if #available(iOS 13.0, *) {
+            imgArrowRight.image = imgArrowRight.image?.withRenderingMode(.alwaysTemplate)
+            imgArrowRight.tintColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+        }
         self.dotView.snp.makeConstraints { make in
             make.left.equalTo(self.titleLab.snp.right)
             make.top.equalToSuperview().offset(7)

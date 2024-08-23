@@ -17,7 +17,11 @@ class BWChatQACell: UITableViewCell {
     var question: QuestionModel?
     lazy var questionView: BWQAView = {
         let view = BWQAView()
-        view.backgroundColor = .white
+//        if #available(iOS 13.0, *) {
+//            view.backgroundColor = UIColor.tertiarySystemBackground
+//        } else {
+//            // Fallback on earlier versions
+//        }
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
@@ -25,7 +29,11 @@ class BWChatQACell: UITableViewCell {
     lazy var timeLab: UILabel = {
         let lab = UILabel()
         lab.font = UIFont.systemFont(ofSize: 13)
-        lab.textColor = timeColor
+        if #available(iOS 13.0, *) {
+            lab.textColor = UIColor.systemGray2
+        } else {
+            // Fallback on earlier versions
+        }
         lab.lineBreakMode = .byTruncatingTail
         return lab
     }()
@@ -34,6 +42,7 @@ class BWChatQACell: UITableViewCell {
         let img = UIImageView()
         img.layer.cornerRadius = iconWidth * 0.5
         img.layer.masksToBounds = true
+        img.isHidden = true
         return img
     }()
     
@@ -42,6 +51,11 @@ class BWChatQACell: UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         if cell == nil {
             cell = Self(style: .default, reuseIdentifier: cellId)
+        }
+        if #available(iOS 13.0, *) {
+            cell?.backgroundColor = UIColor.secondarySystemBackground
+        } else {
+            // Fallback on earlier versions
         }
         return cell as! Self
     }
@@ -67,12 +81,18 @@ class BWChatQACell: UITableViewCell {
                 }else{
                     if let autoReplyItem = model?.autoReplyItem {
                         self.isHidden = false
+                        self.iconView.isHidden = false
                         print("获取到自动回复：" + (autoReplyItem.name ?? ""))
                         self.questionView.setup(model: model!)
                     }
                 }
             }
         }
+    }
+    
+    func displayIconImg(path: String) {
+        let imgUrl = URL(string: "\(baseUrlImage)\(path)")
+        self.iconView.kf.setImage(with: imgUrl)
     }
     
     var model: ChatModel? {
@@ -87,7 +107,6 @@ class BWChatQACell: UITableViewCell {
     override required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = .clear
         self.iconView.image = UIImage.svgInit("icon_server_def2")
         self.contentView.addSubview(self.iconView)
         self.iconView.snp.makeConstraints { make in
