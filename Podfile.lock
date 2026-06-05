@@ -1,0 +1,95 @@
+PODS:
+  - Alamofire (5.4.4)
+  - CocoaLumberjack (3.9.1):
+    - CocoaLumberjack/Core (= 3.9.1)
+  - CocoaLumberjack/Core (3.9.1)
+  - HandyJSON (5.0.2)
+  - IQKeyboardManagerSwift (6.5.16)
+  - Kingfisher (6.3.1)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - SnapKit (5.0.1)
+  - Starscream (4.0.4)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftDate (6.3.1)
+  - SwiftProtobuf (1.27.1)
+  - TeneasyChatSDK_iOS (2.1.0):
+    - Alamofire
+    - Starscream (= 4.0.4)
+    - SwiftProtobuf (~> 1.27.0)
+  - TeneasyChatSDKUI_iOS (1.0.5):
+    - Alamofire (~> 5.4.4)
+    - HandyJSON
+    - IQKeyboardManagerSwift (~> 6.5.9)
+    - Kingfisher (~> 6.3.1)
+    - Moya (~> 15.0.0)
+    - SnapKit (~> 5.0.1)
+    - SVGKit
+    - SVProgressHUD (~> 2.2.5)
+    - SwiftDate (~> 6.3.1)
+    - TeneasyChatSDK_iOS
+    - Toast-Swift (~> 5.0.0)
+    - XMMenuPopover
+  - Toast-Swift (5.0.1)
+  - XMMenuPopover (0.0.3)
+
+DEPENDENCIES:
+  - TeneasyChatSDK_iOS (from `https://github.com/QiSDK/QiChatSDK_iOS.git`)
+  - TeneasyChatSDKUI_iOS (from `https://github.com/QiSDK/QiChatDemo_iOS.git`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CocoaLumberjack
+    - HandyJSON
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - Moya
+    - SnapKit
+    - Starscream
+    - SVGKit
+    - SVProgressHUD
+    - SwiftDate
+    - SwiftProtobuf
+    - Toast-Swift
+    - XMMenuPopover
+
+EXTERNAL SOURCES:
+  TeneasyChatSDK_iOS:
+    :git: https://github.com/QiSDK/QiChatSDK_iOS.git
+  TeneasyChatSDKUI_iOS:
+    :git: https://github.com/QiSDK/QiChatDemo_iOS.git
+
+CHECKOUT OPTIONS:
+  TeneasyChatSDK_iOS:
+    :commit: 59714ad6c8d0b2bb208ad375695f8aca430d3e84
+    :git: https://github.com/QiSDK/QiChatSDK_iOS.git
+  TeneasyChatSDKUI_iOS:
+    :commit: 84be3d061e01a1a4a7dbfd81a8ece296c0056e26
+    :git: https://github.com/QiSDK/QiChatDemo_iOS.git
+
+SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  CocoaLumberjack: e4ba3b414dfca8c1916c6303d37f63b3a95134c6
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftProtobuf: b109bd17979d7993a84da14b1e1fdd8b0ded934a
+  TeneasyChatSDK_iOS: 9e58596e1d277353e65a51e1265755e5c7668a56
+  TeneasyChatSDKUI_iOS: 68380ede2f890fa803e74d1b7e7c174c00fa5f36
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  XMMenuPopover: 5672063abba9abdc7c6c8293f30a43cdd2831f22
+
+PODFILE CHECKSUM: fe397e9619093db1f45fadef0711a026f5d96250
+
+COCOAPODS: 1.16.2
