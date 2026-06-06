@@ -3,7 +3,7 @@ use_frameworks!
 platform :ios, '13.0'
 
 target 'QLUISDK_Demo_iOS_Example' do
-  pod 'TeneasyChatSDKUI_iOS', :git => 'https://github.com/QiSDK/QiChatDemo_iOS.git'
+  pod 'TeneasyChatSDKUI_iOS', :git => 'https://github.com/QiSDK/QiChatDemo_iOS.git', :branch => '2026UISDK'
   pod 'TeneasyChatSDK_iOS', :git => 'https://github.com/QiSDK/QiChatSDK_iOS.git'
   #pod 'TeneasyChatSDKUI_iOS', :path => '../QiChatDemo_iOS'
   #pod 'TeneasyChatSDK_iOS', :path => '/Users/xuefeng/Desktop/teneasy/QiChatSDK_iOS'
