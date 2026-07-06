@@ -83,6 +83,9 @@ class ViewController: UIViewController, LineDetectDelegate {
 
         // 模拟宿主"调自己接口拿到 service_keyword 配置后喂进 SDK"
         loadAutoCardKeywords()
+
+        // demo：显示网络日志悬浮按钮，点开可查看 SDK 的 HTTP 请求
+        NetworkLogPresenter.showFloatingButton()
     }
 
     /// demo：从内置示例 JSON 读取 result[0].service_keyword 并设置到 UISDK。
